@@ -1240,7 +1240,7 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 
 .table-view .column-header:hover .label{
-    -fx-text-fill: #395e83;
+    -fx-text-fill: #033604;
     -fx-alignment: CENTER;
 }
 .table-view .column-header .label{
@@ -1249,7 +1249,7 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 /*table view columns*/
 .filler,.column-header,.show-hide-columns-button {
-    -fx-background-color: #ffffff, #395e83, #395e83;
+    -fx-background-color: #ffffff, #033604, #033604;
    
 }
 .show-hide-columns-button {
