@@ -14,7 +14,6 @@ public class Paciente extends Persona{
     private String tensionArtificial;
     private String frecuenciaRespiratoria;
     private String frecuenciaCardiaca;
-    private String SPO2;
     private Diagnostico diagnostico;
 
     public Paciente(){
@@ -91,14 +90,6 @@ public class Paciente extends Persona{
 
     public void setFrecuenciaCardiaca(String frecuenciaCardiaca) {
         this.frecuenciaCardiaca = frecuenciaCardiaca;
-    }
-
-    public String getSPO2() {
-        return SPO2;
-    }
-
-    public void setSPO2(String SPO2) {
-        this.SPO2 = SPO2;
     }
 
     public Diagnostico getDiagnostico() {

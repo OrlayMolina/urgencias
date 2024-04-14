@@ -30,8 +30,8 @@
          <children>
             <Label text="Nombre de Usuario:" />
             <Label text="Contraseña:" GridPane.rowIndex="2" />
-            <TextField prefHeight="48.0" prefWidth="150.0" promptText="Ingrese su usuario" GridPane.columnIndex="2" />
-            <PasswordField promptText="Ingrese su contraseña" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="txfNombreUsuario" prefHeight="48.0" prefWidth="150.0" promptText="Ingrese su usuario" GridPane.columnIndex="2" />
+            <PasswordField fx:id="txfContrasenia" promptText="Ingrese su contraseña" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane layoutX="355.0" layoutY="401.0">
@@ -44,8 +44,8 @@
           <RowConstraints minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="138.0" styleClass="verde" text="Ingresar" />
-            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="151.0" styleClass="verde" text="Cancelar" GridPane.columnIndex="2" />
+            <Button fx:id="btnIngresar" mnemonicParsing="false" prefHeight="28.0" prefWidth="138.0" styleClass="verde" text="Ingresar" />
+            <Button fx:id="btnCancelarLogin" mnemonicParsing="false" prefHeight="28.0" prefWidth="151.0" styleClass="verde" text="Cancelar" GridPane.columnIndex="2" />
          </children>
       </GridPane>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#08571e" height="502.0" layoutX="-1.0" layoutY="-1.0" stroke="#033604" strokeType="INSIDE" width="250.0" />
