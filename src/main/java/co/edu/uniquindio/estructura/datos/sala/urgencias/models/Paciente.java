@@ -6,7 +6,7 @@ import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Riesgo;
 
 import java.util.Comparator;
 
-public class Paciente extends Persona implements Comparator<Paciente> {
+public class Paciente extends Persona  {
 
     private int edad;
     private Genero genero;
@@ -119,44 +119,17 @@ public class Paciente extends Persona implements Comparator<Paciente> {
     public int determinarPrioridad() {
         int prioridad = 0;
 
-        if (!this.diagnotico.getRiesgo().equals(Riesgo.ALTO) && !this.diagnotico.getRiesgo().equals(Riesgo.MODERADO) &&
-                (this.edad > 60 || this.edad < 14)) {
-            prioridad = 1;
+        if (discapacidad != null && discapacidad.equals(Opcion.SI)) {
+            prioridad = 2;
+        } else if (!diagnotico.getRiesgo().equals(Riesgo.ALTO) && !diagnotico.getRiesgo().equals(Riesgo.MODERADO) && (edad > 60 || edad < 14)) {
+            prioridad = 2;
         }
 
-        if (this.embarazada != null && this.embarazada.equals(Opcion.SI) ||
-                this.discapacidad != null && this.discapacidad.equals(Opcion.SI)) {
-            prioridad = 1;
+        if (embarazada != null && embarazada.equals(Opcion.SI)) {
+            prioridad = 2;
         }
         return prioridad;
     }
 
-    @Override
-    public int compare(Paciente p1, Paciente p2) {
-        // Comparar por riesgo del diagnóstico
-        int riesgoComparison = p1.getDiagnotico().getRiesgo().compareTo(p2.getDiagnotico().getRiesgo());
-        if (riesgoComparison != 0) {
-            return riesgoComparison;
-        }
 
-        // Si el riesgo es el mismo, comparar por edad
-        int edadComparison = Integer.compare(p1.getEdad(), p2.getEdad());
-        if (edadComparison != 0) {
-            return edadComparison;
-        }
-
-        // Si la edad es la misma, verificar si alguno está embarazada o discapacitado
-        if (p1.getEmbarazada() != null && p1.getEmbarazada().equals(Opcion.SI)) {
-            return -1; // p1 tiene prioridad si está embarazada
-        } else if (p2.getEmbarazada() != null && p2.getEmbarazada().equals(Opcion.SI)) {
-            return 1; // p2 tiene prioridad si está embarazada
-        } else if (p1.getDiscapacidad() != null && p1.getDiscapacidad().equals(Opcion.SI)) {
-            return -1; // p1 tiene prioridad si está discapacitado
-        } else if (p2.getDiscapacidad() != null && p2.getDiscapacidad().equals(Opcion.SI)) {
-            return 1; // p2 tiene prioridad si está discapacitado
-        }
-
-        // Si todo lo demás es igual, comparar por orden lexicográfico de nombres
-        return p1.getNombres().compareTo(p2.getNombres());
-    }
 }

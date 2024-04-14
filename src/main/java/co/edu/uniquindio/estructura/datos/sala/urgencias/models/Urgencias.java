@@ -2,10 +2,7 @@ package co.edu.uniquindio.estructura.datos.sala.urgencias.models;
 
 import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Riesgo;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Urgencias {
@@ -46,39 +43,48 @@ public class Urgencias {
     }
 
     public void agregarPaciente(Paciente paciente) {
+        paciente.determinarPrioridad();
         colaDePrioridad.offer(paciente); // Agregar paciente a la cola
     }
 
-    public Paciente atenderSiguientePaciente() {
-        Paciente pacienteAtendido = null;
-
-        // Buscar y atender a pacientes con riesgo ALTO primero
-        while (!colaDePrioridad.isEmpty()) {
-            Paciente paciente = colaDePrioridad.poll(); // Obtener el siguiente paciente en la cola
-            if (paciente.getDiagnotico().getRiesgo() == Riesgo.ALTO) {
-                pacienteAtendido = paciente;
-                break; // Salir del bucle al encontrar un paciente de alto riesgo
-            }
-            // Si el paciente no es de alto riesgo, agregarlo nuevamente a la cola
-            colaDePrioridad.offer(paciente);
-        }
-
-        // Si no se encontraron pacientes de alto riesgo, buscar pacientes con otros tipos de riesgo
-        if (pacienteAtendido == null) {
-            while (!colaDePrioridad.isEmpty()) {
-                Paciente paciente = colaDePrioridad.poll(); // Obtener el siguiente paciente en la cola
-                if (paciente.getDiagnotico().getRiesgo() != Riesgo.ALTO) {
-                    pacienteAtendido = paciente;
-                    break; // Salir del bucle al encontrar un paciente con otro tipo de riesgo
-                }
-                // Si el paciente es de alto riesgo, agregarlo nuevamente a la cola
-                colaDePrioridad.offer(paciente);
+    public void distribuirPacientes(Queue<Paciente> alto, Queue<Paciente> moderado, Queue<Paciente> bajo, Queue<Paciente> prioritario, Queue<Paciente> consultaExterna) {
+        while (!estaVacia()) {
+            Paciente paciente = atenderSiguientePaciente();
+            switch (paciente.getDiagnotico().getRiesgo()) {
+                case ALTO:
+                    alto.offer(paciente);
+                    break;
+                case MODERADO:
+                    moderado.offer(paciente);
+                    break;
+                case BAJO:
+                    bajo.offer(paciente);
+                    break;
+                case PRIORITARIA:
+                    prioritario.offer(paciente);
+                    break;
+                case CONSULTA_EXTERNA:
+                    consultaExterna.offer(paciente);
+                    break;
             }
         }
+    }
 
-        // Mostrar información del paciente atendido
-        if (pacienteAtendido != null) {
+    public void atenderPacientes(Queue<Paciente> pacientes) {
+        while (!pacientes.isEmpty()) {
+            Paciente pacienteAtendido = pacientes.poll();
             System.out.println("Atendiendo a: " + pacienteAtendido.getNombres() + " " + pacienteAtendido.getApellidos() + " - Diagnóstico: " + pacienteAtendido.getDiagnotico().getNombreDX() + " - Riesgo: " + pacienteAtendido.getDiagnotico().getRiesgo());
+        }
+    }
+
+
+    public Paciente atenderSiguientePaciente() {
+        Paciente pacienteAtendido = colaDePrioridad.poll(); // Atender al siguiente paciente en la cola
+
+        if (pacienteAtendido != null && pacienteAtendido.determinarPrioridad() == 2) {
+            // Si el paciente tiene prioridad media debido a discapacidad, volver a agregarlo a la cola con prioridad media
+            colaDePrioridad.offer(pacienteAtendido);
+            pacienteAtendido = colaDePrioridad.poll(); // Obtener el siguiente paciente con prioridad media o alta
         }
 
         return pacienteAtendido;
@@ -107,6 +113,9 @@ public class Urgencias {
 
     public void setDiagnosticos(List<Diagnostico> diagnosticos) {
         this.diagnosticos = diagnosticos;
+    }
+    public boolean estaVacia() {
+        return colaDePrioridad.isEmpty();
     }
 
 }
