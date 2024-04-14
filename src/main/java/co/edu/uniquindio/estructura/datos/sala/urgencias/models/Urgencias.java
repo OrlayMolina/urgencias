@@ -14,6 +14,23 @@ public class Urgencias {
 
     }
 
+    public boolean inicioSesion(String usuario, String password){
+        boolean encontrado = usuarioExiste(usuario, password);
+        return encontrado;
+    }
+
+    public boolean usuarioExiste(String usuario, String password){
+        boolean usuarioExiste = false;
+        for(Enfermera enfermera : getEnfermerasLista()){
+            if(enfermera.getNombreUsuario().equalsIgnoreCase(usuario) &&
+                    enfermera.getContrasenia().equalsIgnoreCase(password)){
+                usuarioExiste = true;
+                break;
+            }
+        }
+        return usuarioExiste;
+    }
+
     public List<Enfermera> getEnfermerasLista() {
         return enfermerasLista;
     }

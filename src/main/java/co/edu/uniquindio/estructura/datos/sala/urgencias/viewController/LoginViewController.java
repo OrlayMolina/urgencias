@@ -1,6 +1,7 @@
 package co.edu.uniquindio.estructura.datos.sala.urgencias.viewController;
 
 import co.edu.uniquindio.estructura.datos.sala.urgencias.MainUrgencias;
+import co.edu.uniquindio.estructura.datos.sala.urgencias.controller.ModelFactoryController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 public class LoginViewController {
 
     MainUrgencias urgencias = new MainUrgencias();
-
+    ModelFactoryController modelFactoryController = new ModelFactoryController();
 
     @FXML
     private Button btnCancelarLogin;
@@ -34,9 +35,13 @@ public class LoginViewController {
     private void inicioSesion(){
         String usuario = txfNombreUsuario.getText();
         String password = txfContrasenia.getText();
+        if(modelFactoryController.inicioSesion(usuario, password)){
+            cerrarVentana(btnIngresar);
+            urgencias.cargarVentanaRegistroPacientes();
+        }else {
+            mostrarMensaje("Notificación de Inicio de Sesión", "Usuario o contraseña incorrecto", "No se pudo iniciar sesión", Alert.AlertType.ERROR);
+        }
 
-        cerrarVentana(btnIngresar);
-        urgencias.cargarVentanaRegistroPacientes();
     }
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {

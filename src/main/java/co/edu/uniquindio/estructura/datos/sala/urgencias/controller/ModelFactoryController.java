@@ -24,6 +24,14 @@ public class ModelFactoryController {
         }
     }
 
+    public Urgencias getUrgencias() {
+        return urgencias;
+    }
+
+    public boolean inicioSesion(String usuario, String password) {
+        return getUrgencias().inicioSesion(usuario, password);
+    }
+
     private void cargarDatosBase() {
         urgencias = UrgenciasUtils.inicializarDatos();
     }
