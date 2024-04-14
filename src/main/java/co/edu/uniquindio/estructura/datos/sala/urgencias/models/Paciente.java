@@ -2,6 +2,7 @@ package co.edu.uniquindio.estructura.datos.sala.urgencias.models;
 
 import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Genero;
 import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Opcion;
+import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Riesgo;
 
 public class Paciente extends Persona{
 
@@ -11,13 +12,30 @@ public class Paciente extends Persona{
     private Opcion discapacidad;
     private Opcion embarazada;
     private String temperatura;
-    private String tensionArtificial;
+    private String tensionArterial;
     private String frecuenciaRespiratoria;
     private String frecuenciaCardiaca;
     private Diagnostico diagnostico;
 
     public Paciente(){
 
+    }
+
+    public Paciente(String nombres, String apellidos, String documento, String foto,
+                    int edad, Genero genero, Opcion discapacidad, Opcion embarazada,
+                    String temperatura, String tensionArterial, String frecuenciaRespiratoria,
+                    String frecuenciaCardiaca, Diagnostico diagnostico) {
+        super(nombres, apellidos, documento);
+        this.foto = foto;
+        this.edad = edad;
+        this.genero = genero;
+        this.discapacidad = discapacidad;
+        this.embarazada = embarazada;
+        this.temperatura = temperatura;
+        this.tensionArterial = tensionArterial;
+        this.frecuenciaRespiratoria = frecuenciaRespiratoria;
+        this.frecuenciaCardiaca = frecuenciaCardiaca;
+        this.diagnostico = diagnostico;
     }
 
     public String getFoto() {
@@ -68,12 +86,12 @@ public class Paciente extends Persona{
         this.temperatura = temperatura;
     }
 
-    public String getTensionArtificial() {
-        return tensionArtificial;
+    public String getTensionArterial() {
+        return tensionArterial;
     }
 
-    public void setTensionArtificial(String tensionArtificial) {
-        this.tensionArtificial = tensionArtificial;
+    public void setTensionArterial(String tensionArtificial) {
+        this.tensionArterial = tensionArtificial;
     }
 
     public String getFrecuenciaRespiratoria() {
@@ -98,5 +116,18 @@ public class Paciente extends Persona{
 
     public void setDiagnostico(Diagnostico diagnostico) {
         this.diagnostico = diagnostico;
+    }
+
+    public int determinarPrioridad() {
+        int prioridad = 0;
+
+        if (diagnostico.getRiesgo().equals(Riesgo.ALTO)) {
+            prioridad = 3;
+        } else if (diagnostico.getRiesgo().equals(Riesgo.MODERADO)) {
+            prioridad = 2;
+        } else if (diagnostico.getRiesgo().equals(Riesgo.BAJO)) {
+            prioridad = 1;
+        }
+        return prioridad;
     }
 }

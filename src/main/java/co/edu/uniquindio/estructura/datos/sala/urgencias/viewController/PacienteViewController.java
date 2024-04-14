@@ -5,6 +5,8 @@ import co.edu.uniquindio.estructura.datos.sala.urgencias.controller.ModelFactory
 import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Genero;
 import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Opcion;
 import co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico;
+import co.edu.uniquindio.estructura.datos.sala.urgencias.models.Paciente;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +26,11 @@ public class PacienteViewController {
     ObservableList<Genero> listaGeneros = FXCollections.observableArrayList();
     ObservableList<Opcion> listaOpciones = FXCollections.observableArrayList();
     ObservableList<Diagnostico> listaDiagnosticos = FXCollections.observableArrayList();
+
+    ObservableList<Paciente> listaBajaPrioridad = FXCollections.observableArrayList();
+    ObservableList<Paciente> listaPrioridadModerada = FXCollections.observableArrayList();
+    ObservableList<Paciente> listaAltaPrioridad = FXCollections.observableArrayList();
+    Paciente pacienteSeleccionado;
     String foto;
 
     @FXML
@@ -54,85 +61,85 @@ public class PacienteViewController {
     private ComboBox<Genero> cmbGenero;
 
     @FXML
-    private TableColumn<?, ?> colApellidoAmarillo;
+    private TableColumn<Paciente, String> colApellidoAmarillo;
 
     @FXML
-    private TableColumn<?, ?> colApellidosNaranja;
+    private TableColumn<Paciente, String> colApellidosNaranja;
 
     @FXML
-    private TableColumn<?, ?> colApellidosRojo;
+    private TableColumn<Paciente, String> colApellidosRojo;
 
     @FXML
-    private TableColumn<?, ?> colDXAmarillo;
+    private TableColumn<Paciente, String> colDXAmarillo;
 
     @FXML
-    private TableColumn<?, ?> colDXNaranja;
+    private TableColumn<Paciente, String> colDXNaranja;
 
     @FXML
-    private TableColumn<?, ?> colDXRojo;
+    private TableColumn<Paciente, String> colDXRojo;
 
     @FXML
-    private TableColumn<?, ?> colDiscapacidadAmarillo;
+    private TableColumn<Paciente, String> colDiscapacidadAmarillo;
 
     @FXML
-    private TableColumn<?, ?> colDiscapacidadNaranja;
+    private TableColumn<Paciente, String> colDiscapacidadNaranja;
 
     @FXML
-    private TableColumn<?, ?> colDiscapacidadRojo;
+    private TableColumn<Paciente, String> colDiscapacidadRojo;
 
     @FXML
-    private TableColumn<?, ?> colDocumentoAmarillo;
+    private TableColumn<Paciente, String> colDocumentoAmarillo;
 
     @FXML
-    private TableColumn<?, ?> colDocumentoNaranja;
+    private TableColumn<Paciente, String> colDocumentoNaranja;
 
     @FXML
-    private TableColumn<?, ?> colDocumentoRojo;
+    private TableColumn<Paciente, String> colDocumentoRojo;
 
     @FXML
-    private TableColumn<?, ?> colEdadAmarillo;
+    private TableColumn<Paciente, Integer> colEdadAmarillo;
 
     @FXML
-    private TableColumn<?, ?> colEdadNaranja;
+    private TableColumn<Paciente, Integer> colEdadNaranja;
 
     @FXML
-    private TableColumn<?, ?> colEdadRojo;
+    private TableColumn<Paciente, Integer> colEdadRojo;
 
     @FXML
-    private TableColumn<?, ?> colEmbarazoAmarrillo;
+    private TableColumn<Paciente, String> colEmbarazoAmarrillo;
 
     @FXML
-    private TableColumn<?, ?> colEmbarazoNaranja;
+    private TableColumn<Paciente, String> colEmbarazoNaranja;
 
     @FXML
-    private TableColumn<?, ?> colEmbarazoRojo;
+    private TableColumn<Paciente, String> colEmbarazoRojo;
 
     @FXML
-    private TableColumn<?, ?> colGeneroAmarillo;
+    private TableColumn<Paciente, String> colGeneroAmarillo;
 
     @FXML
-    private TableColumn<?, ?> colGeneroNaranja;
+    private TableColumn<Paciente, String> colGeneroNaranja;
 
     @FXML
-    private TableColumn<?, ?> colGeneroRojo;
+    private TableColumn<Paciente, String> colGeneroRojo;
 
     @FXML
-    private TableColumn<?, ?> colNombresAmarillo;
+    private TableColumn<Paciente, String> colNombresAmarillo;
 
     @FXML
-    private TableColumn<?, ?> colNombresNaranja;
+    private TableColumn<Paciente, String> colNombresNaranja;
 
     @FXML
-    private TableColumn<?, ?> colNombresRojo;
+    private TableColumn<Paciente, String> colNombresRojo;
 
     @FXML
-    private TableView<?> tblPrioridadAmarillo;
+    private TableView<Paciente> tblPrioridadAmarillo;
 
     @FXML
-    private TableView<?> tblPrioridadNaranja;
+    private TableView<Paciente> tblPrioridadNaranja;
 
     @FXML
-    private TableView<?> tblPrioridadRojo;
+    private TableView<Paciente> tblPrioridadRojo;
 
     @FXML
     private TextField txfApellidos;
@@ -169,6 +176,11 @@ public class PacienteViewController {
     }
 
     @FXML
+    void crearPacienteEnSala(ActionEvent event) {
+        crearPaciente();
+    }
+
+    @FXML
     void initialize() {
         urgencias = new MainUrgencias();
         controller = new ModelFactoryController();
@@ -176,10 +188,158 @@ public class PacienteViewController {
     }
 
     private void initView() {
+        initDataBindingAmarillo();
+        initDataBindingNaranja();
+        initDataBindingRojo();
         mostrarGenero();
         mostrarOpciones();
         getListaDiagnosticos();
         mostrarDiagnosticos();
+        tblPrioridadAmarillo.getItems().clear();
+        tblPrioridadAmarillo.setItems(listaBajaPrioridad);
+        tblPrioridadNaranja.getItems().clear();
+        tblPrioridadNaranja.setItems(listaPrioridadModerada);
+        tblPrioridadRojo.getItems().clear();
+        tblPrioridadRojo.setItems(listaAltaPrioridad);
+        listenerSelectionAmarillo();
+        listenerSelectionNaranja();
+        listenerSelectionRojo();
+    }
+
+    private void initDataBindingAmarillo() {
+        colDocumentoAmarillo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocumento()));
+        colNombresAmarillo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombres()));
+        colApellidoAmarillo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellidos()));
+        colGeneroAmarillo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGenero().toString()));
+        colDiscapacidadAmarillo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDiscapacidad().toString()));
+        colEmbarazoAmarrillo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmbarazada().toString()));
+        colDXAmarillo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDiagnostico().toString()));
+
+    }
+
+    private void listenerSelectionAmarillo() {
+        tblPrioridadAmarillo.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            pacienteSeleccionado = newSelection;
+            mostrarInformacionPaciente(pacienteSeleccionado);
+        });
+    }
+
+    private void initDataBindingNaranja() {
+        colDocumentoNaranja.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocumento()));
+        colNombresNaranja.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombres()));
+        colApellidosNaranja.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellidos()));
+        colGeneroNaranja.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGenero().toString()));
+        colDiscapacidadNaranja.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDiscapacidad().toString()));
+        colEmbarazoNaranja.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmbarazada().toString()));
+        colDXNaranja.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDiagnostico().toString()));
+
+    }
+
+    private void listenerSelectionNaranja() {
+        tblPrioridadNaranja.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            pacienteSeleccionado = newSelection;
+            mostrarInformacionPaciente(pacienteSeleccionado);
+        });
+    }
+
+    private void initDataBindingRojo() {
+        colDocumentoRojo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocumento()));
+        colNombresRojo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombres()));
+        colApellidosRojo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellidos()));
+        colGeneroRojo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGenero().toString()));
+        colDiscapacidadRojo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDiscapacidad().toString()));
+        colEmbarazoRojo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmbarazada().toString()));
+        colDXRojo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDiagnostico().toString()));
+
+    }
+
+    private void listenerSelectionRojo() {
+        tblPrioridadRojo.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            pacienteSeleccionado = newSelection;
+            mostrarInformacionPaciente(pacienteSeleccionado);
+        });
+    }
+
+    private void mostrarInformacionPaciente(Paciente pacienteSeleccionado) {
+        if(pacienteSeleccionado != null){
+            txfDocumento.setText(pacienteSeleccionado.getDocumento());
+            txfNombres.setText(pacienteSeleccionado.getNombres());
+            txfApellidos.setText(pacienteSeleccionado.getApellidos());
+            txfEdad.setText(String.valueOf(pacienteSeleccionado.getEdad()));
+            cmbGenero.setValue(pacienteSeleccionado.getGenero());
+            cmbDiscapacidad.setValue(pacienteSeleccionado.getDiscapacidad());
+            cmbEmbarazo.setValue(pacienteSeleccionado.getEmbarazada());
+            txfTemperatura.setText(pacienteSeleccionado.getTemperatura());
+            txfTensionArterial.setText(pacienteSeleccionado.getTensionArterial());
+            txfFrecuenciaRespiratoria.setText(pacienteSeleccionado.getFrecuenciaRespiratoria());
+            txfFrecuenciaCardiaca.setText(pacienteSeleccionado.getFrecuenciaCardiaca());
+            cmbDX.setValue(pacienteSeleccionado.getDiagnostico());
+
+            String rutaImagen = pacienteSeleccionado.getFoto();
+            if (rutaImagen != null && !rutaImagen.isEmpty()) {
+                File file = new File(rutaImagen);
+                if (file.exists()) {
+                    Image image = new Image(file.toURI().toString());
+                    ImgFoto.setImage(image);
+                } else {
+                    System.out.println("La imagen no existe en la ruta especificada.");
+                }
+            } else {
+                System.out.println("La ruta de la imagen está vacía o es nula.");
+            }
+        }
+
+    }
+
+    private void crearPaciente() {
+        Paciente paciente = construirPaciente();
+        if(datosValidos(paciente)){
+            if(controller.agregarPaciente(paciente)){
+                if(paciente.determinarPrioridad() == 1){
+                    listaBajaPrioridad.add(paciente);
+                }else if(paciente.determinarPrioridad() == 2){
+                    listaPrioridadModerada.add(paciente);
+                }else if(paciente.determinarPrioridad() == 3) {
+                    listaAltaPrioridad.add(paciente);
+                }
+                limpiarCamposPacientes();
+                mostrarMensaje("Notificación paciente", "Paciente creado", "El Paciente creado correctamente", Alert.AlertType.INFORMATION);
+            }else{
+                mostrarMensaje("Notificación paciente", "Paciente no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje("Notificación paciente", "Paciente no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+        }
+    }
+
+    private boolean datosValidos(Paciente paciente) {
+        String mensaje = "";
+        if(paciente.getNombres() == null || paciente.getNombres().equals(""))
+            mensaje += "El nombre del Paciente es invalido \n" ;
+        if(paciente.getApellidos() == null || paciente.getApellidos() .equals(""))
+            mensaje += "El apellido del Paciente es invalido \n" ;
+        if(paciente.getDocumento() == null || paciente.getDocumento() .equals(""))
+            mensaje += "El documento del Paciente es invalido \n" ;
+        if(paciente.getEdad() == 0)
+            mensaje += "La edad del Paciente es invalido \n" ;
+        if(paciente.getGenero() == null)
+            mensaje += "El genero del Paciente es invalido \n" ;
+        if(paciente.getDiscapacidad() == null)
+            mensaje += "La discapacidad del Paciente es invalido \n" ;
+        if(paciente.getEmbarazada() == null)
+            mensaje += "El embarazo del Paciente es invalido \n" ;
+        if(paciente.getTemperatura() == null || paciente.getTemperatura() .equals(""))
+            mensaje += "La temperatura es invalido \n" ;
+        if(paciente.getTensionArterial() == null || paciente.getTensionArterial() .equals(""))
+            mensaje += "La tensión arterial es invalido \n" ;
+        if(paciente.getFrecuenciaCardiaca() == null || paciente.getFrecuenciaCardiaca().equals(""))
+            mensaje += "La frecuencia cárdiaca es invalida \n" ;
+        if(mensaje.equals("")){
+            return true;
+        }else{
+            mostrarMensaje("Notificación producto", "Producto no creado", mensaje, Alert.AlertType.ERROR);
+            return false;
+        }
     }
 
     private void seleccionarImagen(){
@@ -244,6 +404,42 @@ public class PacienteViewController {
 
     public void mostrarDiagnosticos(){
         cmbDX.setItems(listaDiagnosticos);
+    }
+
+    private Paciente construirPaciente() {
+
+        return new Paciente(
+                txfNombres.getText(),
+                txfApellidos.getText(),
+                txfDocumento.getText(),
+                foto,
+                Integer.parseInt(txfEdad.getText()),
+                cmbGenero.getValue(),
+                cmbDiscapacidad.getValue(),
+                cmbEmbarazo.getValue(),
+                txfTemperatura.getText(),
+                txfTensionArterial.getText(),
+                txfFrecuenciaRespiratoria.getText(),
+                txfFrecuenciaCardiaca.getText(),
+                cmbDX.getValue()
+        );
+    }
+
+    private void limpiarCamposPacientes() {
+        txfNombres.setText("");
+        txfApellidos.setText("");
+        txfDocumento.setText("");
+        ImgFoto.setImage(null);
+        txfEdad.setText("");
+        cmbGenero.setValue(null);
+        cmbDiscapacidad.setValue(null);
+        cmbEmbarazo.setValue(null);
+        txfTemperatura.setText("");
+        txfTensionArterial.setText("");
+        txfFrecuenciaRespiratoria.setText("");
+        txfFrecuenciaCardiaca.setText("");
+        cmbDX.setValue(null);
+
     }
 
     public ObservableList<Diagnostico> getListaDiagnosticos() {

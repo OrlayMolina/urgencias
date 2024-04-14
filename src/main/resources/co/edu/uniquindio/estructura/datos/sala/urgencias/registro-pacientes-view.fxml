@@ -99,7 +99,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnIngresarPaciente" layoutX="555.0" layoutY="148.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="167.0" styleClass="verde" text="Ingresar Paciente" />
+                  <Button fx:id="btnIngresarPaciente" layoutX="555.0" layoutY="148.0" mnemonicParsing="false" onAction="#crearPacienteEnSala" prefHeight="14.0" prefWidth="167.0" styleClass="verde" text="Ingresar Paciente" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f0ff1f" height="29.0" layoutX="441.0" layoutY="196.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
                   <TableView fx:id="tblPrioridadAmarillo" layoutX="5.0" layoutY="239.0" prefHeight="163.0" prefWidth="728.0">
                     <columns>
@@ -109,8 +109,7 @@
                         <TableColumn fx:id="colGeneroAmarillo" prefWidth="86.0" text="Geńero" />
                         <TableColumn fx:id="colDiscapacidadAmarillo" prefWidth="93.0" text="Discapacidad?" />
                         <TableColumn fx:id="colEmbarazoAmarrillo" text="Embarazo?" />
-                        <TableColumn fx:id="colEdadAmarillo" prefWidth="68.0" text="Edad" />
-                        <TableColumn fx:id="colDXAmarillo" prefWidth="129.0" text="DX Tentativo" />
+                        <TableColumn fx:id="colDXAmarillo" prefWidth="197.0" text="DX Tentativo" />
                     </columns>
                   </TableView>
                   <GridPane layoutX="156.0" layoutY="152.0">
@@ -134,8 +133,7 @@
                         <TableColumn fx:id="colGeneroNaranja" prefWidth="86.0" text="Geńero" />
                         <TableColumn fx:id="colDiscapacidadNaranja" prefWidth="93.0" text="Discapacidad?" />
                         <TableColumn fx:id="colEmbarazoNaranja" text="Embarazo?" />
-                        <TableColumn fx:id="colEdadNaranja" prefWidth="68.0" text="Edad" />
-                        <TableColumn fx:id="colDXNaranja" prefWidth="131.0" text="DX Tentativo" />
+                        <TableColumn fx:id="colDXNaranja" prefWidth="199.0" text="DX Tentativo" />
                      </columns>
                   </TableView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#033604" height="41.0" layoutX="6.0" layoutY="636.0" stroke="#033604" strokeType="INSIDE" width="729.0" />
@@ -153,8 +151,7 @@
                         <TableColumn fx:id="colGeneroRojo" prefWidth="86.0" text="Geńero" />
                         <TableColumn fx:id="colDiscapacidadRojo" prefWidth="93.0" text="Discapacidad?" />
                         <TableColumn fx:id="colEmbarazoRojo" text="Embarazo?" />
-                        <TableColumn fx:id="colEdadRojo" prefWidth="68.0" text="Edad" />
-                        <TableColumn fx:id="colDXRojo" prefWidth="131.0" text="DX Tentativo" />
+                        <TableColumn fx:id="colDXRojo" prefWidth="199.0" text="DX Tentativo" />
                      </columns>
                   </TableView>
                </children>
