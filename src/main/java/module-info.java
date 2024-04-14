@@ -9,4 +9,8 @@ module co.edu.uniquindio.estructura.datos.sala.urgencias {
     exports co.edu.uniquindio.estructura.datos.sala.urgencias.viewController;
     opens co.edu.uniquindio.estructura.datos.sala.urgencias.models to javafx.fxml;
     exports co.edu.uniquindio.estructura.datos.sala.urgencias.models;
+    opens co.edu.uniquindio.estructura.datos.sala.urgencias.enumms to javafx.fxml;
+    exports co.edu.uniquindio.estructura.datos.sala.urgencias.enumms;
+    //opens co.edu.uniquindio.estructura.datos.sala.urgencias.utils to javafx.fxml;
+    //exports co.edu.uniquindio.estructura.datos.sala.urgencias.utils;
 }
