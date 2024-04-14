@@ -37,6 +37,7 @@ public class PacientePriority {
         int pacientesAtendidos = 0;
         while (pacientesAtendidos < 10) {
             Paciente pacienteAtendido = urgencias.atenderSiguientePaciente();
+            System.out.println("Atendiendo a: " + pacienteAtendido.getNombres() + " " + pacienteAtendido.getApellidos() + " - Diagnóstico: " + pacienteAtendido.getDiagnotico().getNombreDX() + " - Riesgo: " + pacienteAtendido.getDiagnotico().getRiesgo());
             pacientesAtendidos++;
         }
     }
