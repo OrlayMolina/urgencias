@@ -30,4 +30,9 @@ public class Diagnostico {
     public void setRiesgo(Riesgo riesgo) {
         this.riesgo = riesgo;
     }
+
+    @Override
+    public String toString() {
+        return nombreDX + " - RIESGO " + riesgo;
+    }
 }

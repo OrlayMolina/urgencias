@@ -91,8 +91,8 @@
                         <TextField fx:id="txfEdad" GridPane.columnIndex="7" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
-                  <Button fx:id="btnElegirFoto" layoutX="10.0" layoutY="148.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="133.0" styleClass="verde" text="Elegir Imágen" />
-                  <ImageView fx:id="ImgFoto" fitHeight="119.0" fitWidth="123.0" layoutX="15.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="btnElegirFoto" layoutX="10.0" layoutY="148.0" mnemonicParsing="false" onAction="#seleccionarImagen" prefHeight="32.0" prefWidth="133.0" styleClass="verde" text="Elegir Imágen" />
+                  <ImageView fx:id="ImgFoto" fitHeight="119.0" fitWidth="123.0" layoutX="16.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#033604" height="41.0" layoutX="4.0" layoutY="190.0" stroke="#033604" strokeType="INSIDE" width="729.0" />
                   <Label layoutX="182.0" layoutY="192.0" text="Pacientes de Prioridad " textFill="WHITE">
                      <font>
