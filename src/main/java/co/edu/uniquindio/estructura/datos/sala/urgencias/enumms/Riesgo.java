@@ -4,5 +4,7 @@ public enum Riesgo {
 
     BAJO,
     MODERADO,
-    ALTO
+    ALTO,
+    PRIORITARIA,
+    CONSULTA_EXTERNA,
 }

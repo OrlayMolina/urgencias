@@ -42,6 +42,16 @@ public class UrgenciasUtils {
         diagnostico5.setRiesgo(Riesgo.BAJO);
         urgencias.getDiagnosticos().add(diagnostico5);
 
+        Diagnostico diagnostico6 = new Diagnostico();
+        diagnostico6.setNombreDX("DOLOR LUMBAR");
+        diagnostico6.setRiesgo(Riesgo.PRIORITARIA);
+        urgencias.getDiagnosticos().add(diagnostico6);
+
+        Diagnostico diagnostico7= new Diagnostico();
+        diagnostico7.setNombreDX("CONGESTION NASAL");
+        diagnostico7.setRiesgo(Riesgo.CONSULTA_EXTERNA);
+        urgencias.getDiagnosticos().add(diagnostico7);
+
         return urgencias;
     }
 }
