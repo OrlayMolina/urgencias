@@ -4,16 +4,16 @@ public abstract class Persona {
 
     private String nombres;
     private String apellidos;
-    private String cedula;
+    private String documento;
 
     public Persona(){
 
     }
 
-    public Persona(String nombres, String apellidos, String cedula) {
+    public Persona(String nombres, String apellidos, String documento) {
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.cedula = cedula;
+        this.documento = documento;
     }
 
     public String getNombres() {
@@ -32,18 +32,18 @@ public abstract class Persona {
         this.apellidos = apellidos;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     @Override
     public String toString() {
         return "Persona{" +
-                "nombre='" + cedula + '\'' +
+                "nombre='" + documento + '\'' +
                 ", apellido='" + nombres + '\'' +
                 ", cedula='" + apellidos + '\'' +
                 '}';

@@ -12,7 +12,7 @@ public class UrgenciasUtils {
         Enfermera enfermera = new Enfermera();
         enfermera.setNombres("Claudia");
         enfermera.setApellidos("Chitiva");
-        enfermera.setCedula("4578695");
+        enfermera.setDocumento("4578695");
         enfermera.setNombreUsuario("Claudia123");
         enfermera.setContrasenia("123");
         urgencias.getEnfermerasLista().add(enfermera);
