@@ -43,6 +43,26 @@ public class MainUrgencias extends Application {
         }
     }
 
+    public void cargarPantallaLogin() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainUrgencias.class.getResource("login-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.centerOnScreen();
+            String rutaRelativa = "/co/edu/uniquindio/estructura/datos/sala/urgencias/img/logo.JPG";
+            Image iconImage = new Image(Objects.requireNonNull(getClass().getResource(rutaRelativa)).toExternalForm());
+            newStage.getIcons().add(iconImage);
+            newStage.setTitle("Ingresa con tus datos de usuario");
+            newStage.setResizable(false);
+            newStage.setScene(scene);
+            newStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         launch();
     }

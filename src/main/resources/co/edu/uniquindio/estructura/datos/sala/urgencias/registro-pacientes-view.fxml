@@ -33,7 +33,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="btnSalirSistema" layoutX="607.0" layoutY="31.0" mnemonicParsing="false" text="Salir del sistema " />
+            <Button fx:id="btnSalirSistema" layoutX="607.0" layoutY="31.0" mnemonicParsing="false" onAction="#volverLogin" text="Salir del sistema " />
          </children>
       </Pane>
    </top>
