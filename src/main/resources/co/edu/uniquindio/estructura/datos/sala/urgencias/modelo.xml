@@ -16,7 +16,7 @@
     </object>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico" id="Diagnostico0">
      <void property="nombreDX">
       <string>AMPUTACION TRAUMATICA</string>
      </void>

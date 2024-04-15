@@ -61,6 +61,7 @@ public class ModelFactoryController {
         try{
             if(!getUrgencias().verificarPacienteExistente(paciente.getDocumento())) {
                 getUrgencias().agregarPaciente(paciente);
+                guardarResourceXML();
 
             }
             return true;
@@ -74,6 +75,7 @@ public class ModelFactoryController {
         try{
             if(getUrgencias().pacienteExiste(paciente.getDocumento())) {
                 getUrgencias().actualizarPaciente(paciente);
+                guardarResourceXML();
             }
             return true;
         }catch (PacienteException e){
@@ -110,6 +112,6 @@ public class ModelFactoryController {
     }
 
     private void cargarResourceXML() {
-        urgencias = Persistencia.cargarRecursoSubastaXML();
+        urgencias = Persistencia.cargarRecursoUrgenciasXML();
     }
 }
