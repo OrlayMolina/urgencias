@@ -311,9 +311,9 @@ VBox > .split-menu-button.last > .arrow-button {
 .menu-button.verde:pressed,.menu-button.verde:selected
 ,.toggle-button.verde:pressed,.toggle-button.verde:selected,
 .split-menu-button.verde:pressed > .label, .split-menu-button.verde > .arrow-button:pressed {
-	-fx-background-color: #31b0d5;
-	-fx-border-color: #269abc;
-	-fx-effect: innershadow(gaussian, #269abc, 10, 0, 0, 3);
+	-fx-background-color: #41b06e;
+	-fx-border-color: #41b06e;
+	-fx-effect: innershadow(gaussian, #41b06e, 10, 0, 0, 3);
 }
 
 /*naranja*/

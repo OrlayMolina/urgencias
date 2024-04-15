@@ -319,6 +319,11 @@ public class PacienteViewController {
         tblPrioridadAmarillo.getSelectionModel().clearSelection();
         tblPrioridadNaranja.getSelectionModel().clearSelection();
         tblPrioridadRojo.getSelectionModel().clearSelection();
+
+        if (hiloActual != null && hiloActual.isAlive()) {
+            hiloActual.interrupt(); // Detener el hilo de conteo regresivo si está en ejecución
+        }
+
         txfTiempoRestante.setText("00:00:00");
         limpiarCamposPacientes();
         listenerSelectionAmarillo();
