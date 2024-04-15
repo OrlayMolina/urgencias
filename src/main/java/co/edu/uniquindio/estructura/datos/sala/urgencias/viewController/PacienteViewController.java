@@ -6,6 +6,7 @@ import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Genero;
 import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Opcion;
 import co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico;
 import co.edu.uniquindio.estructura.datos.sala.urgencias.models.Paciente;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class PacienteViewController {
 
@@ -30,6 +34,7 @@ public class PacienteViewController {
     ObservableList<Paciente> listaBajaPrioridad = FXCollections.observableArrayList();
     ObservableList<Paciente> listaPrioridadModerada = FXCollections.observableArrayList();
     ObservableList<Paciente> listaAltaPrioridad = FXCollections.observableArrayList();
+    private Thread hiloActual;
     Paciente pacienteSeleccionado;
     String foto;
 
@@ -47,6 +52,9 @@ public class PacienteViewController {
 
     @FXML
     private Button btnSalirSistema;
+
+    @FXML
+    private Button btnMasOpciones;
 
     @FXML
     private ComboBox<Diagnostico> cmbDX;
@@ -164,6 +172,14 @@ public class PacienteViewController {
 
     @FXML
     private TextField txfTensionArterial;
+
+    @FXML
+    private Label txfTiempoRestante;
+
+    @FXML
+    void opcionesAvanzadas(ActionEvent event) {
+
+    }
 
     @FXML
     void volverLogin(ActionEvent event) {
@@ -287,6 +303,8 @@ public class PacienteViewController {
             } else {
                 System.out.println("La ruta de la imagen está vacía o es nula.");
             }
+
+            actualizarTiempoRestante(pacienteSeleccionado.getHoraLlegada(), pacienteSeleccionado);
         }
 
     }
@@ -389,6 +407,63 @@ public class PacienteViewController {
         }
     }
 
+    private void actualizarTiempoRestante(String horaLlegada, Paciente pacienteSeleccionado) {
+        if (hiloActual != null && hiloActual.isAlive()) {
+            hiloActual.interrupt(); // Detener el hilo actual si está en ejecución
+        }
+
+        LocalDateTime horaInicio = LocalDateTime.parse(horaLlegada); // Convertir la hora de llegada a LocalDateTime
+
+        Thread nuevoHilo = new Thread(() -> {
+            boolean tiempoCumplido = false;
+
+            while (!tiempoCumplido) {
+                LocalDateTime horaActual = LocalDateTime.now(); // Obtener la fecha y hora actual
+
+                long segundosRestantes;
+                int prioridad = pacienteSeleccionado.determinarPrioridad();
+
+                switch (prioridad) {
+                    case 1:
+                        segundosRestantes = 4 * 3600; // 4 horas en segundos
+                        break;
+                    case 2:
+                        segundosRestantes = 30 * 60; // 30 minutos en segundos
+                        break;
+                    case 3:
+                    default:
+                        segundosRestantes = 0; // Atender inmediatamente
+                        break;
+                }
+
+                long segundosTranscurridos = ChronoUnit.SECONDS.between(horaInicio, horaActual);
+                segundosRestantes -= segundosTranscurridos;
+
+                if (segundosRestantes <= 0) {
+                    tiempoCumplido = true;
+                    Platform.runLater(() -> txfTiempoRestante.setText("ATENDER!!"));
+                } else {
+                    long horas = segundosRestantes / 3600;
+                    long minutos = (segundosRestantes % 3600) / 60;
+                    long segundos = segundosRestantes % 60;
+
+                    String textoTiempo = String.format("%02d:%02d:%02d", horas, minutos, segundos);
+                    Platform.runLater(() -> txfTiempoRestante.setText(textoTiempo));
+                }
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // Manejar la interrupción del hilo
+                    return;
+                }
+            }
+        });
+
+        hiloActual = nuevoHilo; // Asignar el nuevo hilo como hilo actual
+        nuevoHilo.start(); // Iniciar el hilo para el nuevo anuncio
+    }
+
     public void mostrarGenero(){
         listaGeneros.add(Genero.FEMENINO);
         listaGeneros.add(Genero.MASCULINO);
@@ -414,6 +489,7 @@ public class PacienteViewController {
                 txfDocumento.getText(),
                 foto,
                 Integer.parseInt(txfEdad.getText()),
+                String.valueOf(LocalDateTime.now()),
                 cmbGenero.getValue(),
                 cmbDiscapacidad.getValue(),
                 cmbEmbarazo.getValue(),

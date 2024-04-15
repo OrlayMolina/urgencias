@@ -8,6 +8,7 @@ public class Paciente extends Persona{
 
     private String foto;
     private int edad;
+    private String horaLlegada;
     private Genero genero;
     private Opcion discapacidad;
     private Opcion embarazada;
@@ -22,12 +23,14 @@ public class Paciente extends Persona{
     }
 
     public Paciente(String nombres, String apellidos, String documento, String foto,
-                    int edad, Genero genero, Opcion discapacidad, Opcion embarazada,
-                    String temperatura, String tensionArterial, String frecuenciaRespiratoria,
-                    String frecuenciaCardiaca, Diagnostico diagnostico) {
+                    int edad, String horaLlegada, Genero genero, Opcion discapacidad,
+                    Opcion embarazada, String temperatura, String tensionArterial,
+                    String frecuenciaRespiratoria, String frecuenciaCardiaca,
+                    Diagnostico diagnostico) {
         super(nombres, apellidos, documento);
         this.foto = foto;
         this.edad = edad;
+        this.horaLlegada = horaLlegada;
         this.genero = genero;
         this.discapacidad = discapacidad;
         this.embarazada = embarazada;
@@ -52,6 +55,14 @@ public class Paciente extends Persona{
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public String getHoraLlegada() {
+        return horaLlegada;
+    }
+
+    public void setHoraLlegada(String horaLlegada) {
+        this.horaLlegada = horaLlegada;
     }
 
     public Genero getGenero() {
