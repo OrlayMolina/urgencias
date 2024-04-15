@@ -32,6 +32,11 @@ public class LoginViewController {
         inicioSesion();
     }
 
+    @FXML
+    void limpiarDatos(ActionEvent event) {
+        limpiarCampos();
+    }
+
     private void inicioSesion(){
         String usuario = txfNombreUsuario.getText();
         String password = txfContrasenia.getText();
@@ -42,6 +47,11 @@ public class LoginViewController {
             mostrarMensaje("Notificación de Inicio de Sesión", "Usuario o contraseña incorrecto", "No se pudo iniciar sesión", Alert.AlertType.ERROR);
         }
 
+    }
+
+    public void limpiarCampos(){
+        txfNombreUsuario.setText("");
+        txfContrasenia.setText("");
     }
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {

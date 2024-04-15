@@ -178,12 +178,17 @@ public class PacienteViewController {
 
     @FXML
     void opcionesAvanzadas(ActionEvent event) {
-
+        cancelarBusqueda();
     }
 
     @FXML
     void volverLogin(ActionEvent event) {
         cerrarPrograma();
+    }
+
+    @FXML
+    void editarDatos(ActionEvent event) {
+
     }
 
     @FXML
@@ -307,6 +312,17 @@ public class PacienteViewController {
             actualizarTiempoRestante(pacienteSeleccionado.getHoraLlegada(), pacienteSeleccionado);
         }
 
+    }
+
+    public void cancelarBusqueda(){
+        limpiarCamposPacientes();
+        tblPrioridadAmarillo.getSelectionModel().clearSelection();
+        tblPrioridadNaranja.getSelectionModel().clearSelection();
+        tblPrioridadRojo.getSelectionModel().clearSelection();
+        //recargarInformacion();
+        listenerSelectionAmarillo();
+        listenerSelectionNaranja();
+        listenerSelectionRojo();
     }
 
     private void crearPaciente() {
