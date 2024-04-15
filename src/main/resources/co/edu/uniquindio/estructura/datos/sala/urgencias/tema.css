@@ -316,6 +316,34 @@ VBox > .split-menu-button.last > .arrow-button {
 	-fx-effect: innershadow(gaussian, #269abc, 10, 0, 0, 3);
 }
 
+/*naranja*/
+
+.button.naranja,.split-menu-button.naranja,.toggle-button.naranja,.menu-button.naranja,
+.split-menu-button.naranja > .label, .split-menu-button.naranja > .arrow-button {
+	-fx-background-color: #eb780c;
+}
+
+.button.naranja,.menu-button.naranja,.toggle-button.naranja,
+.split-menu-button.naranja > .label,.split-menu-button.naranja > .arrow-button {
+	-fx-border-color: #033604;
+	-fx-text-fill: white;
+}
+/*hover state*/
+.button.naranja:hover,.menu-button.naranja:hover,.toggle-button.naranja:hover,
+.split-menu-button.naranja > .label:hover, .split-menu-button.naranja > .arrow-button:hover {
+	-fx-border-color: #eb780c;
+	-fx-background-color: #f1bc59;
+}
+/*pressed selected*/
+.button.naranja:pressed, .button.naranja:selected,
+.menu-button.naranja:pressed,.menu-button.naranja:selected
+,.toggle-button.naranja:pressed,.toggle-button.naranja:selected,
+.split-menu-button.naranja:pressed > .label, .split-menu-button.naranja > .arrow-button:pressed {
+	-fx-background-color: #f1bc59;
+	-fx-border-color: #f1bc59;
+	-fx-effect: innershadow(gaussian, #f1bc59, 10, 0, 0, 3);
+}
+
 /*warning*/
 
 .button.warning,.split-menu-button.warning,.toggle-button.warning,.menu-button.warning,

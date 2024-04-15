@@ -319,7 +319,8 @@ public class PacienteViewController {
         tblPrioridadAmarillo.getSelectionModel().clearSelection();
         tblPrioridadNaranja.getSelectionModel().clearSelection();
         tblPrioridadRojo.getSelectionModel().clearSelection();
-        //recargarInformacion();
+        txfTiempoRestante.setText("00:00:00");
+        limpiarCamposPacientes();
         listenerSelectionAmarillo();
         listenerSelectionNaranja();
         listenerSelectionRojo();
