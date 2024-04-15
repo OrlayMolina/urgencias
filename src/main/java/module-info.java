@@ -1,6 +1,8 @@
 module co.edu.uniquindio.estructura.datos.sala.urgencias {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
+    requires java.logging;
 
 
     opens co.edu.uniquindio.estructura.datos.sala.urgencias to javafx.fxml;

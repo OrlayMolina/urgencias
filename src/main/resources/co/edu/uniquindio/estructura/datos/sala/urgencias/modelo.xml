@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.8.1" class="java.beans.XMLDecoder">
+ <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Urgencias" id="Urgencias0">
+  <void property="diagnosticos">
+   <void method="add">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico">
+     <void property="nombreDX">
+      <string>CEFALEA</string>
+     </void>
+     <void property="riesgo">
+      <object class="java.lang.Enum" id="Riesgo0" method="valueOf">
+       <class>co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Riesgo</class>
+       <string>BAJO</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico">
+     <void property="nombreDX">
+      <string>AMPUTACION TRAUMATICA</string>
+     </void>
+     <void property="riesgo">
+      <object class="java.lang.Enum" id="Riesgo1" method="valueOf">
+       <class>co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Riesgo</class>
+       <string>ALTO</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico">
+     <void property="nombreDX">
+      <string>DOLOR ABDOMINAL</string>
+     </void>
+     <void property="riesgo">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Riesgo</class>
+       <string>MODERADO</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico">
+     <void property="nombreDX">
+      <string>PARO CARDIORESPIRATOTIO</string>
+     </void>
+     <void property="riesgo">
+      <object idref="Riesgo1"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico">
+     <void property="nombreDX">
+      <string>DIARREA</string>
+     </void>
+     <void property="riesgo">
+      <object idref="Riesgo0"/>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="enfermerasLista">
+   <void method="add">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Enfermera">
+     <void property="apellidos">
+      <string>Chitiva</string>
+     </void>
+     <void property="contrasenia">
+      <string>123</string>
+     </void>
+     <void property="documento">
+      <string>4578695</string>
+     </void>
+     <void property="nombreUsuario">
+      <string>Claudia123</string>
+     </void>
+     <void property="nombres">
+      <string>Claudia</string>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

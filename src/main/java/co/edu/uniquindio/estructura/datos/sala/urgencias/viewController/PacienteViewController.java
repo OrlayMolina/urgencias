@@ -188,7 +188,7 @@ public class PacienteViewController {
 
     @FXML
     void editarDatos(ActionEvent event) {
-
+        actualizarPaciente();
     }
 
     @FXML
@@ -212,6 +212,9 @@ public class PacienteViewController {
         initDataBindingAmarillo();
         initDataBindingNaranja();
         initDataBindingRojo();
+        obtenerPacientesBajaPrioridad();
+        obtenerPacientesPrioridadModerada();
+        obtenerPacientesAltaPrioridad();
         mostrarGenero();
         mostrarOpciones();
         getListaDiagnosticos();
@@ -349,6 +352,19 @@ public class PacienteViewController {
             }
         }else{
             mostrarMensaje("Notificación paciente", "Paciente no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void actualizarPaciente(){
+        Paciente paciente = construirPaciente();
+        if(datosValidos(paciente)){
+            if(controller.actualizarPaciente(paciente)){
+                mostrarMensaje("Notificación paciente", "Paciente actualizado", "El Paciente actualizado correctamente", Alert.AlertType.INFORMATION);
+            }else{
+                mostrarMensaje("Notificación paciente", "Paciente no actualizado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje("Notificación paciente", "Paciente no actualizado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
     }
 
@@ -543,6 +559,18 @@ public class PacienteViewController {
     public ObservableList<Diagnostico> getListaDiagnosticos() {
         listaDiagnosticos.addAll(controller.obtenerDiagnosticos());
         return listaDiagnosticos;
+    }
+
+    private void obtenerPacientesBajaPrioridad() {
+        listaBajaPrioridad.addAll(controller.obtenerPacientesBajaPrioridad());
+    }
+
+    private void obtenerPacientesPrioridadModerada() {
+        listaPrioridadModerada.addAll(controller.obtenerPacientesPrioridadModerada());
+    }
+
+    private void obtenerPacientesAltaPrioridad() {
+        listaAltaPrioridad.addAll(controller.obtenerPacientesAltaPrioridad());
     }
 
     private void cerrarPrograma(){

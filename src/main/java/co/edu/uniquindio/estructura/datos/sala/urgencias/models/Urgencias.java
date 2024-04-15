@@ -39,7 +39,7 @@ public class Urgencias {
         return usuarioExiste;
     }
 
-    public boolean verificarProductoExistente(String documento) throws PacienteException {
+    public boolean verificarPacienteExistente(String documento) throws PacienteException {
         if(pacienteExiste(documento)){
             throw new PacienteException("El paciente con documento: "+documento+" ya existe");
         }else{
@@ -75,6 +75,28 @@ public class Urgencias {
         }
     }
 
+    public boolean actualizarPaciente(Paciente paciente) throws PacienteException {
+        if(pacienteExiste(paciente.getDocumento())){
+            for (Paciente paciente1 : getPacientesLista()) {
+                if(paciente1.getDocumento().equalsIgnoreCase(paciente.getDocumento())){
+                    paciente1.setNombres(paciente.getNombres());
+                    paciente1.setEdad(paciente.getEdad());
+                    paciente1.setGenero(paciente.getGenero());
+                    paciente1.setEmbarazada(paciente.getEmbarazada());
+                    paciente1.setTemperatura(paciente.getTemperatura());
+                    paciente1.setTensionArterial(paciente.getTensionArterial());
+                    paciente1.setFrecuenciaRespiratoria(paciente.getFrecuenciaRespiratoria());
+                    paciente1.setFrecuenciaCardiaca(paciente.getFrecuenciaCardiaca());
+                    paciente1.setDiagnostico(paciente.getDiagnostico());
+                    break;
+                }
+            }
+            return true;
+        }else{
+            throw new PacienteException("El paciente con documento: "+paciente.getDocumento()+" no existe");
+        }
+    }
+
     public List<Enfermera> getEnfermerasLista() {
         return enfermerasLista;
     }
@@ -97,5 +119,29 @@ public class Urgencias {
 
     public void setDiagnosticos(List<Diagnostico> diagnosticos) {
         this.diagnosticos = diagnosticos;
+    }
+
+    public PriorityQueue<Paciente> getPacientesPrioridadAlta() {
+        return pacientesPrioridadAlta;
+    }
+
+    public void setPacientesPrioridadAlta(PriorityQueue<Paciente> pacientesPrioridadAlta) {
+        this.pacientesPrioridadAlta = pacientesPrioridadAlta;
+    }
+
+    public PriorityQueue<Paciente> getPacientesPrioridadMedia() {
+        return pacientesPrioridadMedia;
+    }
+
+    public void setPacientesPrioridadMedia(PriorityQueue<Paciente> pacientesPrioridadMedia) {
+        this.pacientesPrioridadMedia = pacientesPrioridadMedia;
+    }
+
+    public PriorityQueue<Paciente> getPacientesPrioridadBaja() {
+        return pacientesPrioridadBaja;
+    }
+
+    public void setPacientesPrioridadBaja(PriorityQueue<Paciente> pacientesPrioridadBaja) {
+        this.pacientesPrioridadBaja = pacientesPrioridadBaja;
     }
 }
