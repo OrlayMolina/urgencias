@@ -6,6 +6,7 @@ import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Genero;
 import co.edu.uniquindio.estructura.datos.sala.urgencias.enumms.Opcion;
 import co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico;
 import co.edu.uniquindio.estructura.datos.sala.urgencias.models.Paciente;
+import co.edu.uniquindio.estructura.datos.sala.urgencias.models.Urgencias;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -25,7 +26,8 @@ import java.time.temporal.ChronoUnit;
 
 public class PacienteViewController {
 
-    MainUrgencias urgencias;
+    MainUrgencias urgenciasVentanas;
+    Urgencias urgencias;
     ModelFactoryController controller;
     ObservableList<Genero> listaGeneros = FXCollections.observableArrayList();
     ObservableList<Opcion> listaOpciones = FXCollections.observableArrayList();
@@ -203,7 +205,8 @@ public class PacienteViewController {
 
     @FXML
     void initialize() {
-        urgencias = new MainUrgencias();
+        urgenciasVentanas = new MainUrgencias();
+        urgencias = new Urgencias();
         controller = new ModelFactoryController();
         initView();
     }
@@ -346,10 +349,10 @@ public class PacienteViewController {
                     listaAltaPrioridad.add(paciente);
                 }
                 limpiarCamposPacientes();
-                registrarAcciones("Paciente creado",1, "Paciente creado");
+                registrarAcciones("Paciente creado",1, "Paciente creado por el usuario "+urgencias.getUsuarioLogueado());
                 mostrarMensaje("Notificación paciente", "Paciente creado", "El Paciente creado correctamente", Alert.AlertType.INFORMATION);
             }else{
-                registrarAcciones("No fue posible crear al paciente",1, "Paciente no fue creado");
+                registrarAcciones("No fue posible crear al paciente",1, "Paciente no fue creado, intento realizado por "+urgencias.getUsuarioLogueado());
                 mostrarMensaje("Notificación paciente", "Paciente no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
             }
         }else{
@@ -361,7 +364,7 @@ public class PacienteViewController {
         Paciente paciente = construirPaciente();
         if(datosValidos(paciente)){
             if(controller.actualizarPaciente(paciente)){
-                registrarAcciones("Paciente actualizado",1, "Paciente actualizado");
+                registrarAcciones("Paciente actualizado",1, "Paciente actualizado por el usuario"+urgencias.getUsuarioLogueado() );
                 mostrarMensaje("Notificación paciente", "Paciente actualizado", "El Paciente actualizado correctamente", Alert.AlertType.INFORMATION);
             }else{
                 mostrarMensaje("Notificación paciente", "Paciente no actualizado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
@@ -582,7 +585,7 @@ public class PacienteViewController {
 
     private void cerrarPrograma(){
         cerrarVentana(btnSalirSistema);
-        urgencias.cargarPantallaLogin();
+        urgenciasVentanas.cargarPantallaLogin();
     }
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {

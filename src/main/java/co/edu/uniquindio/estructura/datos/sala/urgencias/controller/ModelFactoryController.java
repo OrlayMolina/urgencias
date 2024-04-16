@@ -37,8 +37,6 @@ public class ModelFactoryController {
             cargarDatosBase();
             guardarResourceXML();
         }
-
-        registrarAccionesSistema("Inicio de sesión", 1, "inicioSesión");
     }
 
     public void registrarAccionesSistema(String mensaje, int nivel, String accion){

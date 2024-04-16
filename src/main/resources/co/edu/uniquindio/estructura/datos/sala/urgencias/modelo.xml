@@ -3,7 +3,7 @@
  <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Urgencias" id="Urgencias0">
   <void property="diagnosticos">
    <void method="add">
-    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico" id="Diagnostico0">
      <void property="nombreDX">
       <string>CEFALEA</string>
      </void>
@@ -16,7 +16,7 @@
     </object>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico" id="Diagnostico1">
      <void property="nombreDX">
       <string>AMPUTACION TRAUMATICA</string>
      </void>
@@ -29,7 +29,7 @@
     </object>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico" id="Diagnostico0">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico" id="Diagnostico2">
      <void property="nombreDX">
       <string>DOLOR ABDOMINAL</string>
      </void>
@@ -42,7 +42,7 @@
     </object>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico" id="Diagnostico1">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico">
      <void property="nombreDX">
       <string>PARO CARDIORESPIRATOTIO</string>
      </void>
@@ -52,7 +52,7 @@
     </object>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico" id="Diagnostico2">
+    <object class="co.edu.uniquindio.estructura.datos.sala.urgencias.models.Diagnostico" id="Diagnostico3">
      <void property="nombreDX">
       <string>DIARREA</string>
      </void>

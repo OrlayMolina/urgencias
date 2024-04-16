@@ -15,6 +15,7 @@ public class Urgencias {
     private PriorityQueue<Paciente> pacientesPrioridadMedia;
     private PriorityQueue<Paciente> pacientesPrioridadBaja;
     private List<Diagnostico> diagnosticos = new ArrayList<>();
+    public static String usuarioLogueado;
 
     public Urgencias(){
         pacientesPrioridadAlta = new PriorityQueue<>(Comparator.comparingInt(Paciente::determinarPrioridad));
@@ -32,6 +33,7 @@ public class Urgencias {
         for(Enfermera enfermera : getEnfermerasLista()){
             if(enfermera.getNombreUsuario().equalsIgnoreCase(usuario) &&
                     enfermera.getContrasenia().equalsIgnoreCase(password)){
+                usuarioLogueado = usuario;
                 usuarioExiste = true;
                 break;
             }
@@ -143,5 +145,13 @@ public class Urgencias {
 
     public void setPacientesPrioridadBaja(PriorityQueue<Paciente> pacientesPrioridadBaja) {
         this.pacientesPrioridadBaja = pacientesPrioridadBaja;
+    }
+
+    public String getUsuarioLogueado() {
+        return usuarioLogueado;
+    }
+
+    public void setUsuarioLogueado(String usuarioLogueado) {
+        Urgencias.usuarioLogueado = usuarioLogueado;
     }
 }
