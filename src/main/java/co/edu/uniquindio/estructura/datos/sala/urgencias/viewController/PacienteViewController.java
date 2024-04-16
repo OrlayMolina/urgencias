@@ -346,8 +346,10 @@ public class PacienteViewController {
                     listaAltaPrioridad.add(paciente);
                 }
                 limpiarCamposPacientes();
+                registrarAcciones("Paciente creado",1, "Paciente creado");
                 mostrarMensaje("Notificación paciente", "Paciente creado", "El Paciente creado correctamente", Alert.AlertType.INFORMATION);
             }else{
+                registrarAcciones("No fue posible crear al paciente",1, "Paciente no fue creado");
                 mostrarMensaje("Notificación paciente", "Paciente no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
             }
         }else{
@@ -359,6 +361,7 @@ public class PacienteViewController {
         Paciente paciente = construirPaciente();
         if(datosValidos(paciente)){
             if(controller.actualizarPaciente(paciente)){
+                registrarAcciones("Paciente actualizado",1, "Paciente actualizado");
                 mostrarMensaje("Notificación paciente", "Paciente actualizado", "El Paciente actualizado correctamente", Alert.AlertType.INFORMATION);
             }else{
                 mostrarMensaje("Notificación paciente", "Paciente no actualizado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
@@ -571,6 +574,10 @@ public class PacienteViewController {
 
     private void obtenerPacientesAltaPrioridad() {
         listaAltaPrioridad.addAll(controller.obtenerPacientesAltaPrioridad());
+    }
+
+    private void registrarAcciones(String mensaje, int nivel, String accion) {
+        controller.registrarAccionesSistema(mensaje, nivel, accion);
     }
 
     private void cerrarPrograma(){
